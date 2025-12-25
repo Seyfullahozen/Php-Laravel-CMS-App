@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Pages\PagesController;
 use App\Http\Controllers\Pages\UsersControllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Yajra\Datatables\Facades\Datatables;
 
 Route::get('/', function (){
    if (Auth::check()) {
@@ -19,3 +21,4 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/api/login', [AuthApiController::class, 'login']);
 Route::get('/dashboard', [PagesController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::get('/users', [UsersControllers::class, 'index'])->name('users')->middleware('auth');
+Route::post('/api/users/getData', [UserApiController::class, 'getData']);
